@@ -3,8 +3,14 @@
 import useRoutes from "@/hooks/useRoutes";
 import React, { useState } from "react";
 import DesktopItem from "./DesktopItem";
+import { User } from "@prisma/client";
+import { Avatar, Badge } from "@nextui-org/react";
 
-const DesktopSidebar = () => {
+type DesktopSidebarProps = {
+  currentUser: User;
+};
+
+const DesktopSidebar = ({ currentUser }: DesktopSidebarProps) => {
   const routes = useRoutes();
   const [open, setOpen] = useState(false);
   return (
@@ -22,6 +28,23 @@ const DesktopSidebar = () => {
             />
           ))}
         </ul>
+      </nav>
+
+      <nav className="mt-4 flex flex-col justify-between items-center">
+        <div
+          onClick={() => setOpen(true)}
+          className="cursor-pointer hover:opacity-75 transition"
+        >
+          <Badge
+            isOneChar
+            shape="circle"
+            placement="top-right"
+            color="success"
+            size="sm"
+          >
+            <Avatar src={currentUser?.image || "/placeholder.jpg"} />
+          </Badge>
+        </div>
       </nav>
     </div>
   );
