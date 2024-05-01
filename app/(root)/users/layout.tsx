@@ -1,3 +1,4 @@
+import ErrorToast from "@/components/global/ErrorToast";
 import Sidebar from "@/components/sidebar/Sidebar";
 import UsersList from "@/components/users/UsersList";
 import getUsers from "@/utils/actions/getUsers";
@@ -8,19 +9,18 @@ export default async function UsersLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  let users: User[] = [];
-  let error: string | undefined = undefined;
-  try {
-    users = await getUsers();
-    console.log(users);
-  } catch (err: any) {
-    // console.log(err);
-    error = err.message;
+  let users: User[] = await getUsers();
+  let error = null;
+
+  if (users instanceof Error) {
+    error = users.message;
+    users = [];
   }
 
   return (
     <div className="h-full">
-      <UsersList users={users} error={error} />
+      <ErrorToast error={error} />
+      <UsersList users={users} />
       <Sidebar>{children}</Sidebar>
     </div>
   );

@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/utils/providers";
-import ToasterContext from "@/components/global/ToasterContext";
 import AuthContext from "@/context/AuthContext";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -21,10 +20,7 @@ export default function RootLayout({
     <html lang="en">
       <Providers>
         <body className={inter.className}>
-          <AuthContext>
-            <ToasterContext />
-            {children}
-          </AuthContext>
+          <AuthContext>{children}</AuthContext>
         </body>
       </Providers>
     </html>

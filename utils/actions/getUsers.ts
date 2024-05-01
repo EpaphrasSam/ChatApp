@@ -7,7 +7,7 @@ const getUsers = async () => {
   try {
     const session = await getSession();
 
-    if (session?.user?.email) {
+    if (!session?.user?.email) {
       throw new Error("User is not authorized");
     }
     const users = await prisma.user.findMany({
@@ -22,8 +22,7 @@ const getUsers = async () => {
     });
     return users;
   } catch (error: any) {
-    // return [];
-    throw new Error(error.message || "Failed to get users");
+    return error;
   }
 };
 

@@ -7,7 +7,7 @@ import { User } from "@prisma/client";
 import { Avatar, Badge } from "@nextui-org/react";
 
 type DesktopSidebarProps = {
-  currentUser: User;
+  currentUser: User | null;
 };
 
 const DesktopSidebar = ({ currentUser }: DesktopSidebarProps) => {

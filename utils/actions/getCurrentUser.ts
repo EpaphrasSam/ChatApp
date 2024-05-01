@@ -6,7 +6,7 @@ import getSession from "./getSession";
 const getCurrentUser = async () => {
   try {
     const session = await getSession();
-    if (!session?.user?.email) return null;
+    if (!session?.user?.email) throw new Error("User is not authorized");
 
     const currentUser = await prisma.user.findUnique({
       where: {
@@ -14,12 +14,11 @@ const getCurrentUser = async () => {
       },
     });
 
-    if (!currentUser) return null;
+    if (!currentUser) throw new Error("User does not exist");
 
     return currentUser;
   } catch (error) {
-    return null;
-    // throw new Error("Failed to get current user");
+    return error;
   }
 };
 
