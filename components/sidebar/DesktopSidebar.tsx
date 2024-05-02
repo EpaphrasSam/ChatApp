@@ -3,11 +3,11 @@
 import useRoutes from "@/hooks/useRoutes";
 import React, { useState } from "react";
 import DesktopItem from "./DesktopItem";
-import { User } from "@prisma/client";
-import { Avatar, Badge } from "@nextui-org/react";
+import { UserType } from "@/types/UserType";
+import CustomAvatar from "../global/CustomAvatar";
 
 type DesktopSidebarProps = {
-  currentUser: User | null;
+  currentUser: UserType;
 };
 
 const DesktopSidebar = ({ currentUser }: DesktopSidebarProps) => {
@@ -35,15 +35,7 @@ const DesktopSidebar = ({ currentUser }: DesktopSidebarProps) => {
           onClick={() => setOpen(true)}
           className="cursor-pointer hover:opacity-75 transition"
         >
-          <Badge
-            isOneChar
-            shape="circle"
-            placement="top-right"
-            color="success"
-            size="sm"
-          >
-            <Avatar src={currentUser?.image || "/placeholder.jpg"} />
-          </Badge>
+          <CustomAvatar user={currentUser} />
         </div>
       </nav>
     </div>

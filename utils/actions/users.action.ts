@@ -1,13 +1,13 @@
 "use server";
 
 import prisma from "../prisma";
-import getSession from "./getSession";
+import getSession from "../../lib/getSession";
 
-const getUsers = async () => {
+export const getUsers = async () => {
   try {
-    const session = await getSession();
+    const { user } = await getSession();
 
-    if (!session?.user?.email) {
+    if (!user) {
       throw new Error("User is not authorized");
     }
     const users = await prisma.user.findMany({
@@ -16,14 +16,12 @@ const getUsers = async () => {
       },
       where: {
         NOT: {
-          email: session?.user?.email,
+          email: user?.email,
         },
       },
     });
-    return users;
+    return { users, error: null };
   } catch (error: any) {
-    return error;
+    return { users: [], error };
   }
 };
-
-export default getUsers;

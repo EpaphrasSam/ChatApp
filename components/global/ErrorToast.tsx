@@ -3,12 +3,16 @@
 import { useEffect } from "react";
 import toast, { Toaster } from "react-hot-toast";
 
-const ErrorToast = ({ error }: { error: string | null }) => {
+const ErrorToast = ({ errors }: { errors?: any[] }) => {
   useEffect(() => {
-    if (error) {
-      toast.error(error || "An error occurred", { id: "error" });
+    if (errors && errors.length > 0) {
+      errors.forEach((error) => {
+        toast.error(error.message || "An error occurred", {
+          id: error.id || "error",
+        });
+      });
     }
-  }, [error]);
+  }, [errors]);
 
   return <Toaster position="top-center" />;
 };

@@ -68,6 +68,7 @@ model Conversation{
 model Message{
   id String @id @default(cuid()) @map("_id")
   body String?
+  image String?
   createdAt DateTime @default(now())
 
   seenIds String[]

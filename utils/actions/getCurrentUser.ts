@@ -1,12 +1,12 @@
 "use server";
 
 import prisma from "../prisma";
-import getSession from "./getSession";
+import getSession from "../../lib/getSession";
 
 const getCurrentUser = async () => {
   try {
     const session = await getSession();
-    if (!session?.user?.email) throw new Error("User is not authorized");
+    if (!session) throw new Error("User is not authorized");
 
     const currentUser = await prisma.user.findUnique({
       where: {

@@ -1,18 +1,18 @@
 "use client";
 
-import { useParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import { useMemo } from "react";
 
 const useConversation = () => {
   const params = useParams();
 
   const conversationId = useMemo(() => {
-    if (!params?.conversationId) {
+    if (!params?.id) {
       return "";
     }
 
-    return params?.conversationId as string;
-  }, [params?.conversationId]);
+    return params?.id as string;
+  }, [params?.id]);
 
   const isOpen = useMemo(() => !!conversationId, [conversationId]);
 
