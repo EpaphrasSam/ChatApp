@@ -5,7 +5,6 @@ import prisma from "./prisma";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { AuthOptions, getServerSession } from "next-auth";
 import brcypt from "bcrypt";
-import { Account, User } from "@prisma/client";
 
 export const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prisma),

@@ -29,11 +29,11 @@ export default async function MainConversation({
   }
 
   return (
-    <div className="lg:pl-80 h-full">
+    <div className="lg:pl-80 h-screen">
       {error && errorMessages && <ErrorToast errors={[error, errorMessages]} />}
       <div className="h-full flex flex-col">
         <Header conversation={conversation} />
-        <MessageBody />
+        <MessageBody initialMessages={messages} />
         <SendMessageForm />
       </div>
     </div>
