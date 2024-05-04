@@ -16,9 +16,9 @@ const getCurrentUser = async () => {
 
     if (!currentUser) throw new Error("User does not exist");
 
-    return currentUser;
-  } catch (error) {
-    return error;
+    return { currentUser, error: null };
+  } catch (error: any) {
+    return { currentUser: null, error };
   }
 };
 

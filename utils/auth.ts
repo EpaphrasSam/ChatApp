@@ -47,7 +47,6 @@ export const authOptions: AuthOptions = {
       },
     }),
   ],
-
   callbacks: {
     async session({ session, token }: any) {
       if (token) {

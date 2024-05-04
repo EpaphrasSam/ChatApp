@@ -1,9 +1,11 @@
 import { withAuth } from "next-auth/middleware";
 
+const excludedRoutes = ["/", "/api/register"];
+
 export default withAuth({
   callbacks: {
     authorized: ({ req, token }: any) => {
-      if (!token && req.nextUrl.pathname !== "/") {
+      if (!token && !excludedRoutes.includes(req.nextUrl.pathname)) {
         return false;
       }
 
